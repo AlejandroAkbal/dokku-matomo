@@ -144,12 +144,12 @@ dokku letsencrypt my-matomo
 dokku letsencrypt:auto-renew my-matomo
 ```
 
-### Grep MariaDB information for the setup
+### Matomo web setup
 
 You need to set up Matomo in the web interface and provide the database details.
-You should be able to access the page via [`https://matomo.example.com`](https://matomo.example.com).
+You should be able to access the web via [`https://matomo.example.com`](https://matomo.example.com).
 
-Run the command below to retrieve the DSN.
+The database details can be accessed by running the command below to retrieve the DSN.
 
 ```sh
 dokku mariadb:info my-matomo-db
