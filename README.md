@@ -172,3 +172,10 @@ After going through the setup, you should be able to use Matomo.
 
 I haven't had the chance to update successfully since Matomo 4.3.0 launched.
 If you find a way, please make a PR!
+
+## Credit
+
+This tutorial was made possible thanks to the following people:
+
+- [CrazyMax](https://github.com/crazy-max)
+- [Romain Clement](https://github.com/rclement/dokku-matomo)'s original tutorial
