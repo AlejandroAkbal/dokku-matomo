@@ -3,17 +3,14 @@
 Deploy your own instance of [Matomo](https://matomo.org) on
 [Dokku](https://github.com/dokku/dokku).
 
-This setup makes use of the great ready-to-use
-[`matomo-docker`](https://github.com/crazy-max/docker-matomo) image by
-[CrazyMax](https://github.com/crazy-max), which does all the heavy-lifting
-to properly deploy Matomo without too much headache.
+This guide makes use of the great [`docker-matomo`](https://github.com/crazy-max/docker-matomo) image by [CrazyMax](https://github.com/crazy-max), which does all the heavy-lifting to properly deploy Matomo without too much hassle.
 
 ## Preface
 
 You will deploy [Matomo 4.1.1\*](https://github.com/matomo-org/matomo/releases/tag/4.1.1) onto your own
 Dokku server.
 
-Note that all the steps below are meant to be executed on the Dokku server.
+Keep in mind that all the steps below are meant to be executed on the Dokku server.
 
 \*: Please read the [upgrading section](#upgrading) to see why this is the latest working version.
 
@@ -55,7 +52,8 @@ dokku mariadb:link my-matomo-db my-matomo
 
 #### Environment variables
 
-Then we will configure Matomo.
+Configure Matomo with your preferences.
+Here are some useful defaults:
 
 ```sh
 dokku config:set my-matomo --no-restart matomo TZ=Europe/Berlin
@@ -69,7 +67,7 @@ dokku config:set my-matomo --no-restart matomo LOG_LEVEL=WARN
 
 #### Persistent storage
 
-You need to mount a volume to persist all settings that you set in the Matomo interface.
+You need to mount a volume to persist all the settings that you set in the Matomo interface.
 
 ```sh
 mkdir /var/lib/dokku/data/storage/my-matomo
@@ -83,14 +81,14 @@ dokku storage:mount my-matomo /var/lib/dokku/data/storage/my-matomo:/data
 
 #### Domain setup
 
-To get the routing working, we need to apply a few settings. First, set the
-domain.
+To get the routing working, we need to apply a few settings.
+First, set the domain.
 
 ```sh
 dokku domains:set my-matomo matomo.example.com
 ```
 
-We also need to update the ports set by Dokku.
+You will also need to update the ports set by Dokku.
 
 ```sh
 dokku proxy:ports-add my-matomo http:80:8000
@@ -102,8 +100,7 @@ mappings except the added above.
 
 #### Email settings (optional)
 
-You need to set the following settings if you want to receive emails from
-Matomo.
+Set the following settings if you want to receive emails from Matomo.
 
 ```sh
 dokku config:set my-matomo --no-restart SSMTP_HOST=smtp.example.com
@@ -116,7 +113,7 @@ dokku config:set my-matomo --no-restart SSMTP_TLS=YES
 
 #### GeoIP2
 
-The GeoIP2 plugin is already installed but needs to be configured.
+The GeoIP2 plugin is already installed in the docker image, but needs to be configured.
 
 [Follow the instructions in the crazymax/docker-matomo repository](https://github.com/crazy-max/-matomo#geoip2) to enable it.
 
