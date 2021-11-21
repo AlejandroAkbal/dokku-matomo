@@ -7,12 +7,10 @@ This guide makes use of the great [`docker-matomo`](https://github.com/crazy-max
 
 ## Preface
 
-You will deploy [Matomo 4.1.1\*](https://github.com/matomo-org/matomo/releases/tag/4.1.1) onto your own
+You will deploy [Matomo 4.5.0](https://github.com/matomo-org/matomo/releases/tag/4.1.1) onto your own
 Dokku server.
 
 Keep in mind that all the steps below are meant to be executed on the Dokku server.
-
-\*: Please read the [upgrading section](#upgrading) to see why this is the latest working version.
 
 ## Limitations
 
@@ -129,7 +127,7 @@ If needed, the Matomo configuration file is located at `/var/lib/dokku/data/stor
 Now, all you need to do is use CrazyMax's docker image to deploy Matomo.
 
 ```sh
-dokku git:from-image my-matomo crazymax/matomo:4.1.1
+dokku git:from-image my-matomo crazymax/matomo:4.5.0
 ```
 
 [Read more about the `git:from-image` command](https://dokku.com/docs~v0.26.6/deployment/methods/git/#initializing-an-app-repository-from-a-docker-image) in case of problems.
@@ -167,11 +165,6 @@ Database Name: my_matomo_db
 ```
 
 After going through the setup, you should be able to use Matomo.
-
-## Upgrading
-
-I haven't had the chance to update successfully since Matomo 4.3.0 launched.
-If you find a way, please make a PR!
 
 ## Credit
 
