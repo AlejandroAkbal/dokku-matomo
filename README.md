@@ -12,7 +12,7 @@ Dokku server.
 
 Keep in mind that all the steps below are meant to be executed on the Dokku server.
 
-## Limitations
+### Limitations
 
 Currently, the following features are not supported:
 
@@ -21,7 +21,7 @@ Currently, the following features are not supported:
 
 Contributions are welcome!
 
-## Requirements
+### Requirements
 
 - [Dokku 0.26.6](https://github.com/dokku/dokku)
 - [Dokku "dokku-mariadb" plugin](https://github.com/dokku/dokku-mariadb)
@@ -131,16 +131,6 @@ dokku git:from-image my-matomo crazymax/matomo:4.5.0
 ```
 
 [Read more about the `git:from-image` command](https://dokku.com/docs~v0.26.6/deployment/methods/git/#initializing-an-app-repository-from-a-docker-image) in case of problems.
-
-### Setup Let's Encrypt SSL certificate (optional)
-
-Set up an SSL certificate via Let's Encrypt.
-
-```sh
-dokku config:set --no-restart my-matomo DOKKU_LETSENCRYPT_EMAIL=letsencrypt@example.com
-dokku letsencrypt my-matomo
-dokku letsencrypt:auto-renew my-matomo
-```
 
 ### Matomo web setup
 
