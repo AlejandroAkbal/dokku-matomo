@@ -42,7 +42,9 @@ dokku apps:create my-matomo
 Next create the MariaDB database required by Matomo and link it to the app.
 
 ```sh
-dokku mariadb:create my-matomo-db
+# Optional, set `max_allowed_packet` to at least 64MB, as Matomo recommends
+dokku mariadb:create my-matomo-db --config-options "--max-allowed-packet=67108864"
+
 dokku mariadb:link my-matomo-db my-matomo
 ```
 
