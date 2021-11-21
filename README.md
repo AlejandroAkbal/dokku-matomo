@@ -57,6 +57,8 @@ Here are some useful defaults:
 
 ```sh
 dokku config:set my-matomo --no-restart matomo TZ=Europe/Berlin
+dokku config:set my-matomo --no-restart matomo PUID=1000
+dokku config:set my-matomo --no-restart matomo PGID=1000
 dokku config:set my-matomo --no-restart matomo MEMORY_LIMIT=256M
 dokku config:set my-matomo --no-restart matomo UPLOAD_MAX_SIZE=16M
 dokku config:set my-matomo --no-restart matomo OPCACHE_MEM_SIZE=128
@@ -65,6 +67,8 @@ dokku config:set my-matomo --no-restart matomo REAL_IP_HEADER=X-Forwarded-For
 dokku config:set my-matomo --no-restart matomo LOG_LEVEL=WARN
 ```
 
+[View all configuration options](https://github.com/crazy-max/docker-matomo#environment-variables).
+
 #### Persistent storage
 
 You need to mount a volume to persist all the settings that you set in the Matomo interface.
@@ -72,9 +76,8 @@ You need to mount a volume to persist all the settings that you set in the Matom
 ```sh
 mkdir /var/lib/dokku/data/storage/my-matomo
 
-# UID:GUID are set to 101. These are the values the nginx image uses,
-# that is used by crazymax/matomo
-chown 101:101 /var/lib/dokku/data/storage/my-matomo
+# UID:GUID are set to 1000. These are the values the docker-matomo image uses.
+sudo chown 1000:1000 -R /var/lib/dokku/data/storage/my-matomo
 
 dokku storage:mount my-matomo /var/lib/dokku/data/storage/my-matomo:/data
 ```
