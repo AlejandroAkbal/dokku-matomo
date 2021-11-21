@@ -96,8 +96,7 @@ dokku proxy:ports-add my-matomo http:80:8000
 dokku proxy:ports-remove my-matomo http:80:5000
 ```
 
-If Dokku proxy:report sentry shows more than one port mapping, remove all port
-mappings except the added above.
+If Dokku proxy:report sentry shows more than one port mapping, remove all port mappings except the added above.
 
 #### Email settings (optional)
 
