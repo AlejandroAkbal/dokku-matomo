@@ -7,7 +7,7 @@ This guide makes use of the great [`docker-matomo`](https://github.com/crazy-max
 
 ## Preface
 
-You will deploy [Matomo 4.5.0](https://github.com/matomo-org/matomo/releases/tag/4.1.1) onto your own
+You will deploy [Matomo 4.12.3](https://github.com/matomo-org/matomo) onto your own
 Dokku server.
 
 Keep in mind that all the steps below are meant to be executed on the Dokku server.
@@ -23,7 +23,7 @@ Contributions are welcome!
 
 ### Requirements
 
-- [Dokku 0.26.6](https://github.com/dokku/dokku)
+- [Dokku](https://github.com/dokku/dokku)
 - [Dokku "dokku-mariadb" plugin](https://github.com/dokku/dokku-mariadb)
 - [Dokku "dokku-letsencrypt" plugin](https://github.com/dokku/dokku-letsencrypt)
 
@@ -128,7 +128,7 @@ If needed, the Matomo configuration file is located at `/var/lib/dokku/data/stor
 Now, all you need to do is use CrazyMax's docker image to deploy Matomo.
 
 ```sh
-dokku git:from-image my-matomo crazymax/matomo:4.5.0
+dokku git:from-image my-matomo crazymax/matomo:4.12.3
 ```
 
 [Read more about the `git:from-image` command](https://dokku.com/docs~v0.26.6/deployment/methods/git/#initializing-an-app-repository-from-a-docker-image) in case of problems.
