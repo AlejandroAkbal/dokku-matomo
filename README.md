@@ -117,11 +117,33 @@ dokku config:set my-matomo --no-restart SSMTP_TLS=YES
 
 The GeoIP2 plugin is already installed in the docker image, but needs to be configured.
 
-[Follow the instructions in the crazymax/docker-matomo repository](https://github.com/crazy-max/-matomo#geoip2) to enable it.
+[Follow the instructions in the crazymax/docker-matomo repository](https://github.com/crazy-max/docker-matomo#geoip2) to enable it.
 
 ### Advanced configuration
 
 If needed, the Matomo configuration file is located at `/var/lib/dokku/data/storage/matomo/config/config.ini.php` and can be manually edited.
+
+#### Cron jobs
+
+You can enable automatic archiving by using the sidecar.
+You will need to set up an external cron job to trigger the archiving.
+
+```sh
+# Enter root crontab
+sudo crontab -e
+```
+
+Add the following lines to the crontab:
+
+```sh
+PATH=/usr/local/bin:/usr/bin:/bin
+SHELL=/bin/bash
+
+# Execute Matomo archiving
+*/30 * * * * dokku dokku run --env "ARCHIVE_OPTIONS=--concurrent-requests-per-website=3" matomo-akbal-dev "/usr/local/bin/matomo_archive"
+```
+
+Please read [CrazyMax's Cron documentation](https://github.com/crazy-max/docker-matomo#cron) for more information.
 
 ## Deploy
 
