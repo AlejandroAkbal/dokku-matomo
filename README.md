@@ -16,7 +16,6 @@ Keep in mind that all the steps below are meant to be executed on the Dokku serv
 
 Currently, the following features are not supported:
 
-- Archive via cron
 - Redis cache
 
 Contributions are welcome!
@@ -129,18 +128,39 @@ You can enable automatic archiving by using the sidecar.
 You will need to set up an external cron job to trigger the archiving.
 
 ```sh
-# Enter root crontab
-sudo crontab -e
+sudo nano /etc/cron.d/dokku-my-matomo
 ```
 
 Add the following lines to the crontab:
 
 ```sh
+# This file should be located at /etc/cron.d/dokku-my-matomo
+
+MAILTO="email@example.com"
 PATH=/usr/local/bin:/usr/bin:/bin
 SHELL=/bin/bash
 
-# Execute Matomo archiving
+# m   h   dom mon dow   username command
+# *   *   *   *   *     dokku    command to be executed
+# -   -   -   -   -
+# |   |   |   |   |
+# |   |   |   |   +----- day of week (0 - 6) (Sunday=0)
+# |   |   |   +------- month (1 - 12)
+# |   |   +--------- day of month (1 - 31)
+# |   +----------- hour (0 - 23)
+# +----------- min (0 - 59)
+
+### HIGH TRAFFIC TIME IS B/W 00:00 - 04:00 AND 14:00 - 23:59
+### RUN YOUR TASKS FROM 04:00 - 14:00
+### KEEP SORTED IN TIME ORDER
+
+### PLACE ALL CRON TASKS BELOW
+
+# Run matomo archive
 */30 * * * * dokku dokku run --env "ARCHIVE_OPTIONS=--concurrent-requests-per-website=3" matomo-akbal-dev "/usr/local/bin/matomo_archive"
+
+### PLACE ALL CRON TASKS ABOVE, DO NOT REMOVE THE WHITESPACE AFTER THIS LINE
+
 ```
 
 Please read [CrazyMax's Cron documentation](https://github.com/crazy-max/docker-matomo#cron) for more information.
